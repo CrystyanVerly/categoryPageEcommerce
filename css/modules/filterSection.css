@@ -1,0 +1,249 @@
+/* filter section */
+
+/* filter right */
+.filter-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 65px;
+}
+
+.title-section-product {
+  font-size: var(--font-size-very-large);
+  font-weight: var(--font-weight-regular);
+  text-transform: capitalize;
+}
+
+/* btn mobile */
+.hide {
+  display: none;
+}
+
+.section-filter-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* filter left */
+
+.form-filter {
+  animation: show-items 0.5s forwards;
+}
+
+.form-filter .input-filter[type="checkbox"] {
+  display: none;
+}
+
+.label-input-filter {
+  display: flex;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.label-input-filter::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--transparent50);
+  margin-right: 10px;
+}
+
+.checkmark {
+  display: inline-block;
+  position: absolute;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  transition: 0.3s;
+}
+
+.label-input-filter:hover input ~ .checkmark {
+  background-color: var(--grey-color4);
+}
+
+.label-input-filter input:checked ~ .checkmark {
+  background-color: var(--primary-color);
+}
+
+.section-filter-left {
+  width: 100%;
+  max-width: 157px;
+  margin-right: 44px;
+}
+
+.title-filter {
+  font-size: var(--font-size-regular);
+  font-weight: var(--font-weight-light);
+  text-transform: uppercase;
+  color: var(--grey-color1);
+  margin: 24px 0px 14px 0px;
+}
+
+.decorative-line {
+  visibility: hidden;
+}
+
+.title-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-filter-container img {
+  width: 15px;
+  height: 10px;
+  visibility: hidden;
+}
+
+/* by color */
+
+.container-filter-by-colors .label-input-filter {
+  display: flex;
+  align-items: center;
+  animation: show-items 0.5s forwards;
+}
+.label-input-filter + .label-input-filter {
+  margin-top: 10px;
+}
+
+.title-color {
+  margin-top: 0;
+}
+
+/* accordion color */
+
+.accordion-container {
+  margin-top: 5px;
+  font-size: var(--font-size-very-small);
+  padding: 5px 0;
+}
+
+.accordion-container a {
+  display: flex;
+  align-items: baseline;
+  color: var(--grey-color2);
+  text-decoration: underline;
+}
+
+.accordion-container img {
+  width: 10px;
+  height: 8px;
+  margin-left: 5px;
+  transition: 0.4s;
+}
+
+.container-filter-by-colors .form-filter label.inactive {
+  display: none;
+}
+
+/* filter size */
+
+.form-filter-size {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--transparent50);
+}
+
+.letter-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--transparent50);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-size:checked ~ .letter-size {
+  color: var(--black-color);
+  border-color: var(--primary-color);
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--primary-color);
+}
+
+.input-size {
+  display: inline-block;
+}
+
+.title-size {
+  margin: 24px 0px;
+}
+
+/* filter price */
+
+.container-filter-by-price .label-input-filter {
+  display: flex;
+  font-size: var(--font-size-small);
+  align-items: center;
+}
+
+/* order filter */
+
+.section-filter-right {
+  display: flex;
+}
+
+.form-filter-order {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Estilo para o select */
+.order-filter-btn,
+.btn-filter-mbl.filter-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  width: 142px;
+  height: 42px;
+  border: 1px solid var(--transparent50);
+  font-size: var(--font-size-regular);
+  color: var(--black-color);
+  background-color: var(--white-color);
+  cursor: pointer;
+}
+
+.btn-filter-mbl.filter-right {
+  display: none;
+}
+
+.order-filter-btn img {
+  width: 12px;
+  height: 9px;
+  transition: 0.4s;
+}
+
+.accordion-content {
+  position: absolute;
+  z-index: 997;
+  background: var(--white-color);
+  width: 142px;
+  border: 1px solid var(--transparent50);
+  transition: 0.4s;
+  animation: show-items 0.3s forwards;
+}
+
+.accordion-content li {
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.accordion-content li:hover {
+  background: var(--primary-color-gradient5);
+
+  color: var(--grey-color);
+}

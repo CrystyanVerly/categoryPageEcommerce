@@ -1,0 +1,25 @@
+/* button load more */
+.btn-load-more {
+  padding: 8px 40px;
+  border: 1px solid;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+  color: var(--white-color);
+  background: linear-gradient(
+    var(--primary-color),
+    var(--primary-color-gradient5)
+  );
+  cursor: pointer;
+  transition: 0.6s ease;
+  margin-left: 12.5rem;
+}
+
+.black-and-white-button {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+  transition: 0.3s;
+}
+
+.btn-load-more:hover {
+  background: linear-gradient(#f9df22, #fecf29);
+}

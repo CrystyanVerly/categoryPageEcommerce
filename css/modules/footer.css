@@ -1,0 +1,11 @@
+/* footer */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background: var(--black-color);
+  text-transform: uppercase;
+  color: var(--white-color);
+  padding: 7px;
+  margin-top: 6px;
+}

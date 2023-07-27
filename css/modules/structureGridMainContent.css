@@ -1,0 +1,25 @@
+/* main content */
+
+.main-content {
+  display: grid;
+  grid-template-columns: 205px minmax(auto, 976px);
+  grid-template-areas:
+    "filter shelf"
+    "filter shelf"
+    "load-more load-more";
+  margin-bottom: 3rem;
+}
+
+.section-filter-left {
+  grid-area: filter;
+}
+
+.container-products-list {
+  grid-area: shelf;
+}
+
+.btn-load-more {
+  grid-area: load-more;
+  justify-self: center;
+  font-size: var(--font-size-small);
+}

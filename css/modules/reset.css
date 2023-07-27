@@ -1,0 +1,53 @@
+/* reset */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  font-family: var(--pattern-font-family);
+  color: var(--black-color);
+  position: relative;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* scroll bar */
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--grey-color4) var(--grey-color6);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--grey-color4);
+  border-radius: 10px;
+  border: 3px solid var(--white-color);
+}

@@ -1,0 +1,28 @@
+/* grid structure*/
+
+.grid-structure {
+  display: grid;
+  grid-template-columns: 10.8% 205px 1fr 10.8%;
+  grid-template-areas:
+    ". header header ."
+    ". filter-info filter-info ."
+    ". main main ."
+    ". main main ."
+    ".footer footer .";
+}
+
+.grid-header {
+  grid-column: 1 / -1;
+}
+
+.grid-main {
+  grid-area: main;
+}
+
+.filter-info {
+  grid-area: filter-info;
+}
+
+.grid-footer {
+  grid-column: 1 / -1;
+}

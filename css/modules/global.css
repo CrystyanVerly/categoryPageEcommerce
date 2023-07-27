@@ -1,0 +1,138 @@
+:root {
+  /* font */
+
+  /* family */
+  --pattern-font-family: "Open Sans", sans-serif;
+
+  /* weight */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* size */
+  --font-size-micro: 0.625rem; /* 10px */
+  --font-size-very-small: 0.75rem; /* 12px */
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-regular: 1rem; /* 16px */
+  --font-size-large: 1.5rem; /* 24px */
+  --font-size-very-large: 2rem; /* 32px */
+
+  /* colors */
+  --primary-color: #fae400;
+  --primary-color-gradient1: #fbe60a;
+  --primary-color-gradient2: #fcee14;
+  --primary-color-gradient3: #fdf31e;
+  --primary-color-gradient4: #feea29;
+  --primary-color-gradient5: #fecb00;
+  --primary-color-gradient6: #e1b70e;
+  --black-color: #000;
+  --grey-color1: #333;
+  --grey-color2: #666;
+  --grey-color3: #808080;
+  --grey-color4: #8c8c8c;
+  --grey-color4: #ccc;
+  --grey-color5: #c7c7c7;
+  --grey-color6: #f6f8f9;
+  --white-color: #fff;
+  --transparent50: rgba(0, 0, 0, 0.5);
+
+  /* warning colors */
+  --warning-success-color: #2ffe74;
+  --warning-error-color: #ff5757;
+  --warning-color: #fff564;
+
+  /* spacings */
+}
+
+/* classes */
+.toRotate {
+  rotate: -180deg;
+}
+
+/* animation */
+@keyframes openShoppingCart {
+  from {
+    opacity: 0.9;
+    transform: translate3d(100%, 0px, 0px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0%, 0px, 0px);
+  }
+}
+
+@keyframes closeShoppingCart {
+  from {
+    opacity: 1;
+    transform: translate3d(0%, 0px, 0px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translate3d(100%, 0px, 0px);
+  }
+}
+
+@keyframes openModalFilter {
+  from {
+    opacity: 0.9;
+    transform: translate3d(-100%, 0px, 0px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0%, 0px, 0px);
+  }
+}
+
+@keyframes closeModalFilter {
+  from {
+    opacity: 1;
+    transform: translate3d(0%, 0px, 0px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translate3d(-100%, 0px, 0px);
+  }
+}
+
+@keyframes show-items {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes showProducts {
+  from {
+    opacity: 0.975;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes showToast {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, -40%, 0);
+  }
+}
+
+@keyframes hideToast {
+  from {
+    opacity: 1;
+    transform: translate3d(0, -40%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}

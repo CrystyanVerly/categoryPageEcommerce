@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/img/forever21-fiveicon.jpg"
+      type="image/x-icon"
+    />
+
+    <!-- Scripts -->
+    <script
+      src="https://kit.fontawesome.com/8eebd5e0b7.js"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <script src="./main.js" defer></script>
+
+    <!-- Title -->
+    <title>Forever 21</title>
+  </head>
+
+  <body>
+    <!-- Shopping cart modal -->
+    <aside class="modal-shopping-cart-container">
+      <div class="amount-items-cart-container">
+        <p>Seu carrinho tem <span class="amount-items-cart">0</span> itens</p>
+        <img src="img/close-x.svg" alt="close modal cart button" />
+      </div>
+      <ul class="shopping-cart-list"></ul>
+      <div class="finish-purchase-container">
+        <div class="total-price-container">
+          <p>Subtotal:</p>
+          <span>R$ <span class="total-price-purchase">0,00</span></span>
+        </div>
+        <div class="discount-container">
+          <div class="cep-container">
+            <i class="fa-solid fa-truck-arrow-right"></i>
+            <input
+              type="text"
+              placeholder="CEP"
+              class="cep-input hide"
+              aria-label="CEP"
+            />
+            <p>Calcular frete</p>
+          </div>
+
+          <div class="coupon-container">
+            <i class="fa-solid fa-tag"></i>
+            <input
+              type="text"
+              class="coupon-input hide"
+              placeholder="Insira seu Cupom"
+              aria-label="Cupom"
+            />
+            <p>Adicionar cupom</p>
+          </div>
+        </div>
+        <button type="submit" class="finish-purchase-btn">
+          Finalizar Compra
+        </button>
+      </div>
+    </aside>
+
+    <!-- all content -->
+    <div class="grid-structure">
+      <!-- overlayer modal -->
+      <div class="modal-overlay"></div>
+      <!-- Header -->
+      <header class="header grid-header">
+        <nav class="nav">
+          <a href="https://www.forever21.com/" aria-label="Forever 21">
+            <img
+              src="./img/forever21-logo.svg"
+              alt="enterprise branding"
+              class="img-brand"
+          /></a>
+          <a
+            href="#"
+            class="container-count-added-products"
+            aria-label="Carrinho de compras"
+          >
+            <img
+              src="./img/shopping_bag.svg"
+              alt="shopping bag"
+              class="img-shopping-cart"
+            />
+            <span class="count-added-products">0</span>
+          </a>
+        </nav>
+      </header>
+
+      <!-- Section Filter -->
+      <section class="filter-info">
+        <!-- Filter title-->
+        <h1 class="title-section-product">Blusas</h1>
+
+        <!-- Filter right Order by -->
+        <section class="section-filter-right grid-filter-r">
+          <!-- Buttons mobile -->
+          <button
+            type="button"
+            class="btn-filter-mbl filter-right hide filterLeftBTN"
+            aria-label="Filtrar"
+          >
+            Filtrar
+          </button>
+
+          <div class="accordion-btn-container">
+            <button
+              type="button"
+              class="accordion-btn order-filter-btn section-filter-right accordion filterRightBTN"
+              aria-expanded="false"
+              aria-controls="order-filter-options"
+            >
+              Ordenar
+              <img src="./img/arrow.svg" alt="arrow" />
+            </button>
+
+            <div class="filter-right-container">
+              <ul
+                class="accordion-content hide"
+                id="order-filter-options"
+                aria-hidden="true"
+              >
+                <li class="header-modal-filter order hide">
+                  <p>Ordenar</p>
+                  <img
+                    src="img/close-x.svg"
+                    class="close-modal-filter filterRight"
+                    alt="close modal cart button"
+                  />
+                </li>
+                <!-- <li value="orderBy">Ordenar por:</li> -->
+                <li value="newers">Mais recentes</li>
+                <li value="cheaper">Menor preço</li>
+                <li value="expensive">Maior preço</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <main class="main-content grid-main">
+        <!-- Filter left -->
+        <aside class="section-filter-left grid-filter-l">
+          <div class="header-modal-filter filter hide">
+            <p>Filtrar</p>
+            <img
+              src="img/close-x.svg"
+              class="close-modal-filter filterLeft"
+              alt="close modal cart button"
+            />
+          </div>
+
+          <!-- Filter by color -->
+          <div class="container-filter-by-colors">
+            <div class="title-filter-container colors">
+              <h2 class="title-filter title-color">Cores</h2>
+              <img src="./img/arrow.svg" alt="arrow" />
+            </div>
+            <form action="#" class="form-filter"></form>
+          </div>
+
+          <!-- Filter by size -->
+          <div class="container-filter-by-sizes">
+            <div class="title-filter-container">
+              <h2 class="title-filter title-size">Tamanhos</h2>
+              <img src="./img/arrow.svg" alt="arrow" />
+            </div>
+            <form action="#" class="form-filter form-filter-size"></form>
+          </div>
+
+          <!-- Filter by price -->
+          <div class="container-filter-by-price">
+            <div class="title-filter-container">
+              <h2 class="title-filter title-price">Faixa de preços</h2>
+              <img src="./img/arrow.svg" alt="arrow" />
+            </div>
+            <form action="#" class="form-filter">
+              <label for="0,50" name="price" class="label-input-filter"
+                ><input
+                  type="checkbox"
+                  name="price"
+                  id="0,50"
+                  class="input-price input-filter"
+                  value="0,50"
+                />
+                <span class="checkmark"></span>
+                <span>de R$0 até R$50</span>
+              </label>
+              <label for="51,150" class="label-input-filter"
+                ><input
+                  type="checkbox"
+                  name="price"
+                  id="51,150"
+                  class="input-price input-filter"
+                  value="51,150"
+                />
+                <span class="checkmark"></span>
+                <span>de R$51 até R$150</span>
+              </label>
+              <label for="151,300" class="label-input-filter"
+                ><input
+                  type="checkbox"
+                  name="price"
+                  id="151,300"
+                  class="input-price input-filter"
+                  value="151,300"
+                />
+                <span class="checkmark"></span>
+                <span>de R$151 até R$300</span>
+              </label>
+              <label for="301,500" class="label-input-filter"
+                ><input
+                  type="checkbox"
+                  name="price"
+                  id="301,500"
+                  class="input-price input-filter"
+                  value="301,500"
+                />
+                <span class="checkmark"></span>
+                <span>de R$301 até R$500</span>
+              </label>
+              <label for="500,999999" class="label-input-filter"
+                ><input
+                  type="checkbox"
+                  name="price"
+                  id="500,999999"
+                  class="input-price input-filter"
+                  value="500,999999"
+                />
+                <span class="checkmark"></span>
+                <span>a partir de R$500</span>
+              </label>
+            </form>
+          </div>
+        </aside>
+
+        <!-- Product list - Main content -->
+        <section class="container-products-list">
+          <!-- Li's inserted from JS -->
+          <ul class="products-list"></ul>
+
+          <!-- Error not found message -->
+          <div class="noProductFound inactive">
+            <p>Desculpe, nenhum produto encontrado!</p>
+            <img src="./img/downcast-face.svg" alt="downcast face" />
+          </div>
+        </section>
+
+        <!-- Load more -->
+        <button type="button" class="btn-load-more">Carregar mais</button>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer grid-footer">
+        <p>&copy; Alguns direitos reservados</p>
+      </footer>
+    </div>
+
+    <!-- Toast message -->
+    <div class="toast-wrapper hide">
+      <div id="toast">
+        <div class="check-icon-container">
+          <i class="fas fa-check-square"></i>
+        </div>
+        <div class="toast-msg-container">
+          <p>Ótimo! ;)</p>
+          <p>Adicionado ao carrinho!</p>
+        </div>
+        <img
+          src="img/close-x.svg"
+          class="close-toast-btn"
+          alt="close toasty button"
+        />
+      </div>
+    </div>
+  </body>
+</html>
