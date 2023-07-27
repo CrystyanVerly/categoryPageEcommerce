@@ -3,8 +3,9 @@ import structureProductsMiniCart from "./structureProductsMiniCart.js";
 export default function renderProductsMiniCart(productId) {
   const getAllProductsFromLS = JSON.parse(localStorage.getItem("AllProducts"));
   const ulModalProduct = document.querySelector(".shopping-cart-list");
-  let arrBoughtProducts =
-    JSON.parse(localStorage.getItem("boughtProducts")) || [];
+  let arrBoughtProducts = JSON.parse(
+    localStorage.getItem("boughtProducts")
+  ) || { items: [], total: 0 };
 
   const shoppingBagCont = document.querySelector(".count-added-products");
   const modalShoppingCartAmount = document.querySelector(".amount-items-cart");
@@ -45,33 +46,48 @@ export default function renderProductsMiniCart(productId) {
     subTotalPurchased.innerText = cleanPrice(subTotalNumber);
   }
 
-  function setBoughtItemsInLS(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+  function productExistsInItems(items, productId) {
+    return items.some((item) => item.id === productId);
   }
 
-  const processedIds = new Set();
+  function setBoughtItemsInLS(key, value) {
+    const arrBoughtProducts = JSON.parse(
+      localStorage.getItem("boughtProducts")
+    ) || {
+      items: [],
+      total: 0,
+    };
+
+    const newItems = value.items.filter(
+      (product) => !productExistsInItems(arrBoughtProducts.items, product.id)
+    );
+
+    newItems.forEach((item) => {
+      let sum = subTotalNumber;
+      const object = {
+        items: [...arrBoughtProducts.items, ...newItems],
+        total: (sum += item.price),
+      };
+      localStorage.setItem(key, JSON.stringify(object));
+    });
+  }
 
   getAllProductsFromLS.forEach((product) => {
     const boughtProductID = product.id;
-    const boughtProductPrice = product.price;
-    if (
-      !processedIds.has(boughtProductID) &&
-      Number(productId) === Number(boughtProductID) &&
-      !ulModalProduct.querySelector(`#cart-item-${boughtProductID}`)
-    ) {
-      if (!arrBoughtProducts.some((item) => item.id === boughtProductID)) {
-        arrBoughtProducts.push(product);
-      }
-      processedIds.add(boughtProductID);
 
-      setBoughtItemsInLS("boughtProducts", arrBoughtProducts);
-      addCountToBag();
-      updatePriceOnIncrement(boughtProductPrice);
+    if (Number(productId) === Number(boughtProductID)) {
+      if (
+        !arrBoughtProducts.items.some((item) => item.id === boughtProductID) &&
+        !ulModalProduct.querySelector(`#cart-item-${boughtProductID}`)
+      ) {
+        arrBoughtProducts.items.push(product);
+        setBoughtItemsInLS("boughtProducts", arrBoughtProducts);
+      }
     }
   });
 
-  if (arrBoughtProducts.length > 0) {
-    arrBoughtProducts.forEach((bought) => {
+  if (arrBoughtProducts.items.length > 0) {
+    arrBoughtProducts.items.forEach((bought) => {
       const boughtProductID = bought.id;
       const boughtProductPrice = bought.price;
 
@@ -81,10 +97,13 @@ export default function renderProductsMiniCart(productId) {
             const quantityID = stock.id;
             if (boughtProductID === quantityID) {
               structureProductsMiniCart(bought, ulModalProduct, stock);
+              updatePriceOnIncrement(boughtProductPrice);
+              addCountToBag();
             }
           });
         }
       }
+
       const minusBTN = document.querySelector(
         `#decrement-item-${boughtProductID}`
       );
@@ -111,75 +130,86 @@ export default function renderProductsMiniCart(productId) {
         quantityStock.innerText.replace(" disponíveis", "").trim()
       );
 
-      function maximumAmountStock() {
-        if (numAmountWished === quantityStockFormatted) {
-          quantityStock.classList.add("maximum");
-        }
-        if (numAmountWished !== quantityStockFormatted) {
-          quantityStock.classList.remove("maximum");
-        }
-      }
-
-      function removeProductFromCart(itemInCartToRemove) {
-        itemInCartToRemove.remove();
-
-        processedIds.delete(boughtProductID);
-        removeCountFromBag();
-
-        arrBoughtProducts = arrBoughtProducts.filter(
-          (item) => item.id !== boughtProductID
-        );
-
-        updatePriceOnDecrement(boughtProductPrice * numAmountWished);
-        setBoughtItemsInLS("boughtProducts", arrBoughtProducts);
-      }
-
-      function handlePriceProduct() {
-        const calculatedPrice = numAmountWished * boughtProductPrice;
-        priceProductMiniCart.innerText = `R$ ${cleanPrice(calculatedPrice)}`;
-      }
-
-      function incrementAmount() {
-        numAmountWished++;
-        amountItemsWished.innerText = numAmountWished;
-        handlePriceProduct();
-        updatePriceOnIncrement(boughtProductPrice);
-        maximumAmountStock();
-      }
-
-      function decrementAmount() {
-        if (numAmountWished > 0) {
-          numAmountWished--;
-          amountItemsWished.innerText = numAmountWished;
-          handlePriceProduct();
-          updatePriceOnDecrement(boughtProductPrice);
-        }
-        if (numAmountWished < 1) {
-          const itemInCartToRemove = minusBTN.closest(".cart-item");
-          removeProductFromCart(itemInCartToRemove);
-          handlePriceProduct();
-          updatePriceOnDecrement(boughtProductPrice * numAmountWished);
-        }
-        maximumAmountStock();
-      }
-
-      function amountProductMiniCart() {
-        minusBTN.addEventListener("click", decrementAmount);
-        plusBTN.addEventListener("click", () => {
-          if (numAmountWished < quantityStockFormatted) {
-            incrementAmount();
-          }
-        });
-      }
-
       if (
-        removeItemBTN &&
-        amountItemsWished &&
-        numAmountWished &&
-        priceProductMiniCart &&
         minusBTN &&
-        plusBTN
+        plusBTN &&
+        amountItemsWished &&
+        removeItemBTN &&
+        priceProductMiniCart &&
+        quantityStock
       ) {
+        function setItemInLS(key, value) {
+          localStorage.setItem(key, JSON.stringify(value));
+        }
+        function maximumAmountStock() {
+          if (numAmountWished === quantityStockFormatted) {
+            quantityStock.classList.add("maximum");
+          }
+          if (numAmountWished !== quantityStockFormatted) {
+            quantityStock.classList.remove("maximum");
+          }
+        }
+
+        function removeProductFromCart(itemInCartToRemove) {
+          itemInCartToRemove.remove();
+          removeCountFromBag();
+
+          arrBoughtProducts.items = arrBoughtProducts.items.filter(
+            (item) => item.id !== boughtProductID
+          );
+
+          updatePriceOnDecrement(boughtProductPrice * numAmountWished);
+          arrBoughtProducts.total = subTotalNumber;
+          setItemInLS("boughtProducts", arrBoughtProducts);
+        }
+
+        function handlePriceProduct() {
+          const calculatedPrice = numAmountWished * boughtProductPrice;
+          return (priceProductMiniCart.innerText = `R$ ${cleanPrice(
+            calculatedPrice
+          )}`);
+        }
+
+        function incrementAmount() {
+          numAmountWished++;
+          handlePriceProduct();
+          updatePriceOnIncrement(boughtProductPrice);
+          arrBoughtProducts.total = subTotalNumber;
+
+          maximumAmountStock();
+          bought.amountWished = numAmountWished;
+          amountItemsWished.innerText = bought.amountWished;
+          setItemInLS("boughtProducts", arrBoughtProducts);
+        }
+
+        function decrementAmount() {
+          if (numAmountWished > 0) {
+            numAmountWished--;
+            handlePriceProduct();
+            updatePriceOnDecrement(boughtProductPrice);
+            bought.amountWished = numAmountWished;
+            amountItemsWished.innerText = bought.amountWished;
+            arrBoughtProducts.total = subTotalNumber;
+            setItemInLS("boughtProducts", arrBoughtProducts);
+          }
+          if (numAmountWished < 1) {
+            const itemInCartToRemove = minusBTN.closest(".cart-item");
+            removeProductFromCart(itemInCartToRemove);
+            handlePriceProduct();
+            updatePriceOnDecrement(boughtProductPrice * numAmountWished);
+          }
+          maximumAmountStock();
+        }
+
+        function amountProductMiniCart() {
+          minusBTN.addEventListener("click", decrementAmount);
+          plusBTN.addEventListener("click", () => {
+            if (numAmountWished < quantityStockFormatted) {
+              incrementAmount();
+            }
+          });
+        }
+
         amountProductMiniCart();
         maximumAmountStock();
 
@@ -190,8 +220,4 @@ export default function renderProductsMiniCart(productId) {
       }
     });
   }
-
-  window.onbeforeunload = function () {
-    localStorage.removeItem("boughtProducts");
-  };
 }
