@@ -38,12 +38,12 @@ export default function renderProductsMiniCart(productId) {
 
   function updatePriceOnIncrement(productPrice) {
     subTotalNumber += productPrice;
-    subTotalPurchased.innerText = cleanPrice(subTotalNumber);
+    subTotalPurchased.innerText = cleanPrice(Number(subTotalNumber.toFixed(2)));
   }
 
   function updatePriceOnDecrement(productPrice) {
     subTotalNumber -= productPrice;
-    subTotalPurchased.innerText = cleanPrice(subTotalNumber);
+    subTotalPurchased.innerText = cleanPrice(Number(subTotalNumber.toFixed(2)));
   }
 
   function productExistsInItems(items, productId) {
@@ -62,25 +62,29 @@ export default function renderProductsMiniCart(productId) {
       (product) => !productExistsInItems(arrBoughtProducts.items, product.id)
     );
 
+    let newTotal = arrBoughtProducts.total;
     newItems.forEach((item) => {
-      let sum = subTotalNumber;
-      const object = {
-        items: [...arrBoughtProducts.items, ...newItems],
-        total: (sum += item.price),
-      };
-      localStorage.setItem(key, JSON.stringify(object));
+      newTotal += item.price;
     });
+
+    const object = {
+      items: [...arrBoughtProducts.items, ...newItems],
+      total: Number(newTotal.toFixed(2)),
+    };
+
+    localStorage.setItem(key, JSON.stringify(object));
   }
 
   getAllProductsFromLS.forEach((product) => {
     const boughtProductID = product.id;
-
+    product.amountWished = 1;
     if (Number(productId) === Number(boughtProductID)) {
       if (
         !arrBoughtProducts.items.some((item) => item.id === boughtProductID) &&
         !ulModalProduct.querySelector(`#cart-item-${boughtProductID}`)
       ) {
         arrBoughtProducts.items.push(product);
+
         setBoughtItemsInLS("boughtProducts", arrBoughtProducts);
       }
     }
@@ -90,6 +94,7 @@ export default function renderProductsMiniCart(productId) {
     arrBoughtProducts.items.forEach((bought) => {
       const boughtProductID = bought.id;
       const boughtProductPrice = bought.price;
+      const boughtProductAmount = bought.amountWished;
 
       if (!ulModalProduct.querySelector(`#cart-item-${boughtProductID}`)) {
         if (arrQuantityStock.length > 0) {
@@ -114,6 +119,7 @@ export default function renderProductsMiniCart(productId) {
         `#item-${boughtProductID}`
       );
       let numAmountWished = Number(amountItemsWished.innerText);
+      numAmountWished = boughtProductAmount;
 
       const removeItemBTN = document.querySelector(
         `.fa-trash-can[value="${boughtProductID}"]`
@@ -159,7 +165,8 @@ export default function renderProductsMiniCart(productId) {
           );
 
           updatePriceOnDecrement(boughtProductPrice * numAmountWished);
-          arrBoughtProducts.total = subTotalNumber;
+          arrBoughtProducts.total = Number(subTotalNumber.toFixed(2));
+
           setItemInLS("boughtProducts", arrBoughtProducts);
         }
 
@@ -174,7 +181,7 @@ export default function renderProductsMiniCart(productId) {
           numAmountWished++;
           handlePriceProduct();
           updatePriceOnIncrement(boughtProductPrice);
-          arrBoughtProducts.total = subTotalNumber;
+          arrBoughtProducts.total = Number(subTotalNumber.toFixed(2));
 
           maximumAmountStock();
           bought.amountWished = numAmountWished;
@@ -189,7 +196,7 @@ export default function renderProductsMiniCart(productId) {
             updatePriceOnDecrement(boughtProductPrice);
             bought.amountWished = numAmountWished;
             amountItemsWished.innerText = bought.amountWished;
-            arrBoughtProducts.total = subTotalNumber;
+            arrBoughtProducts.total = Number(subTotalNumber.toFixed(2));
             setItemInLS("boughtProducts", arrBoughtProducts);
           }
           if (numAmountWished < 1) {

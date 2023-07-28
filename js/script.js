@@ -9,6 +9,7 @@ import loadMoreProducts from "./modules/loadMoreProducts.js";
 import toggleModalShopCart from "./modules/toggleModalShopCart.js";
 import accordionResponsiveFilter from "./modules/accordionResponsiveFilter.js";
 import valueOffPurchase from "./modules/valueOffPurchase.js";
+import persistingInMiniCart from "./modules/persistingInMiniCart";
 
 renderProducts().then(() => {
   fetchStock().then(() => {
@@ -21,5 +22,6 @@ renderProducts().then(() => {
     toggleModalShopCart();
     accordionResponsiveFilter();
     valueOffPurchase();
+    persistingInMiniCart();
   });
 });
