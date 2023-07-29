@@ -1,13 +1,12 @@
 import renderProductsMiniCart from "./renderProductsMiniCart";
 
 export default function persistingInMiniCart() {
-  let arrBoughtProducts = JSON.parse(
+  const arrBoughtProducts = JSON.parse(
     localStorage.getItem("boughtProducts")
   ) || { items: [], total: 0 };
 
   const shoppingBagCont = document.querySelector(".count-added-products");
   const modalShoppingCartAmount = document.querySelector(".amount-items-cart");
-
   const subTotalPurchased = document.querySelector(".total-price-purchase");
 
   function refreshCountInBagAndModal() {
@@ -33,12 +32,13 @@ export default function persistingInMiniCart() {
       const amountItemsWished = document.querySelector(
         `#item-${boughtProductID}`
       );
-
       const priceProductMiniCart = document.querySelector(
         `#price-${boughtProductID}`
       );
+
       amountItemsWished.innerText = boughtProductAmount;
       const calculatedPrice = boughtProductAmount * boughtProductPrice;
+
       priceProductMiniCart.innerText = `R$ ${cleanPrice(calculatedPrice)}`;
       subTotalPurchased.innerText = `${cleanPrice(arrBoughtProducts.total)}`;
     });

@@ -316,4 +316,7 @@
   .section-filter-left {
     width: 85%;
   }
+  /* .shopping-cart-list li {
+    flex-direction: column;
+  } */
 }

@@ -36,7 +36,7 @@ export default function structureProductsMiniCart(
               <img src="img/minus.svg" alt="minus item btn" />
             </button>
             <span class="amount-items-wished" id="item-${itemBoughtAPI.id}"> 
-            ${1} 
+            ${itemBoughtAPI.amountWished} 
             </span>
             <button type="button" class="amount-item-btn-ctrl" id="increment-item-${
               itemBoughtAPI.id
